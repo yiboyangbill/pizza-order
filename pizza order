@@ -1,0 +1,104 @@
+display.newText( "subtotal, tax and the final cost", display.contentCenterX, display.contentCenterY -250, native.systemFont, 20 )
+
+local subtotalTextField = native.newTextField( display.contentCenterX, display.contentCenterY + -210, 300, 40 )
+subtotalTextField.id = "subtotalTextField"
+
+local taxTextField = native.newTextField( display.contentCenterX, display.contentCenterY + -165, 300, 40 )
+taxTextField.id = "taxTextField"
+
+local finalcostTextField = native.newTextField( display.contentCenterX, display.contentCenterY + -120, 300, 40 )
+finalcostTextField.id = "finalcostTextField"
+
+local image = display.newImageRect( "enterButton.png", 150, 75 )
+image.x = display.contentCenterX
+image.y = 185
+image.id = "calculate button"
+
+display.newText( "large or extra large", display.contentCenterX, display.contentCenterY, native.systemFont, 20 )
+
+local sizeTextField = native.newTextField( display.contentCenterX, display.contentCenterY + 50, 300, 50 )
+sizeTextField.id = "sizeTextField"
+
+display.newText( "Quantity of toppings", display.contentCenterX, 340, native.systemFont, 20 )
+
+local toppingsTextField = native.newTextField( display.contentCenterX, display.contentCenterY + 150, 300, 50 )
+toppingsTextField.id = "toppingsTextField"
+toppingsTextField.inputType = "number"
+ 
+local function calculateButtonTouch( event )
+
+    local subtotal
+
+    local tax
+
+    local finalcost
+
+    local size
+
+    local toppings
+    
+    size = sizeTextField.text
+    toppings = toppingsTextField.text
+
+    if size == "large" then
+    	if toppings == "1" then
+    		subtotal = 7
+    		tax = 0.91
+    		finalcost = 7.91
+    	end
+    		
+        if toppings == "2" then
+    		subtotal = 7.75
+    		tax = 1.0075
+    		finalcost = 8.7575
+    	end
+    		
+        if toppings == "3" then
+    		subtotal = 8.50
+    		tax = 1.105
+    		finalcost = 9.605
+    	end
+    		
+    	if toppings == "4" then
+    		subtotal = 9.35
+    		tax = 1.2155
+    		finalcost = 10.5655
+    	end	
+    end
+
+    if size == "extra large" then
+    	if toppings == "1" then
+    		subtotal = 11
+    		tax = 1.43
+    		finalcost = 12.43
+    	end	
+
+        if toppings == "2" then
+    		subtotal = 11.75
+    		tax = 1.5275
+    		finalcost = 13.2775
+    	end	
+
+        if toppings == "3" then
+    		subtotal = 12.50
+    		tax = 1.625
+    		finalcost = 14.125
+    	end
+
+    	if toppings == "4" then
+    		subtotal = 13.35
+    		tax = 1.7355
+    		finalcost = 15.0855
+    	end	
+
+    end
+
+    subtotalTextField.text = "The subtotal is " .. subtotal
+    taxTextField.text = "The tax is " .. tax
+    finalcostTextField.text = "The finalcost is " .. finalcost
+
+    return true    
+
+end
+
+image:addEventListener( "touch", calculateButtonTouch )
